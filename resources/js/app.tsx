@@ -9,8 +9,11 @@ void createInertiaApp({
 
     resolve: (name) =>
         resolvePageComponent(
-            `./pages/${name}.tsx`,
-            import.meta.glob('./pages/**/*.tsx'),
+            `./pages/${name}.${name === 'welcome' ? 'tsx' : 'jsx'}`,
+            {
+                ...import.meta.glob('./pages/**/*.jsx'),
+                ...import.meta.glob('./pages/**/*.tsx'),
+            },
         ),
 
     setup({ el, App, props }) {
